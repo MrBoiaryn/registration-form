@@ -1,0 +1,119 @@
+<h2 class="my-5">Bootstrap registration form</h2>
+
+<form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+  <div class="mb-3">
+    <label for="name" class="form-label">{{formLabels.name}} <span class="text-danger">*</span></label>
+    <input type="text" class="form-control" id="name" aria-describedby="helpIdName" [placeholder]="formPlaceholder.name"
+      formControlName="name" (blur)="onValueChanges()"
+      [class]="{'is-valid': form['name'].valid, 'is-invalid': form['name'].invalid && (form['name'].dirty || form['name'].touched)}" />
+    <div *ngIf="form['name'].valid" class="valid-feedback">{{formSuccess.name}}</div>
+    <div *ngIf="form['name'].invalid && (form['name'].dirty || form['name'].touched)" class="invalid-feedback">
+      {{formErrors.name}}</div>
+    <small id="helpIdName" class="form-text text-muted">{{formHelpId.name}}</small>
+  </div>
+
+  <div class="mb-3">
+    <label for="companyName" class="form-label">{{formLabels.companyName}} <span class="text-danger">*</span></label>
+    <input type="text" class="form-control" id="companyName" aria-describedby="helpIdCompanyName"
+      [placeholder]="formPlaceholder.companyName" formControlName="companyName" (blur)="onValueChanges()"
+      [class]="{'is-valid': form['companyName'].valid, 'is-invalid': form['companyName'].invalid && (form['companyName'].dirty || form['companyName'].touched)}" />
+    <div *ngIf="form['companyName'].valid" class="valid-feedback">{{formSuccess.companyName}}</div>
+    <div *ngIf="form['companyName'].invalid && (form['companyName'].dirty || form['companyName'].touched)"
+      class="invalid-feedback">{{formErrors.companyName}}</div>
+    <small id="helpIdCompanyName" class="form-text text-muted">{{formHelpId.companyName}}</small>
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">{{formLabels.email}} <span class="text-danger">*</span></label>
+    <input type="email" class="form-control" id="email" aria-describedby="helpIdEmail"
+      [placeholder]="formPlaceholder.email" formControlName="email" (blur)="onValueChanges()"
+      [class]="{'is-valid': form['email'].valid, 'is-invalid': form['email'].invalid && (form['email'].dirty || form['email'].touched)}" />
+    <div *ngIf="form['email'].valid" class="valid-feedback">{{formSuccess.email}}</div>
+    <div *ngIf="form['email'].invalid && (form['email'].dirty || form['email'].touched)" class="invalid-feedback">
+      {{formErrors.email}}</div>
+    <small id="helpIdEmail" class="form-text text-muted">{{formHelpId.email}}</small>
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">{{formLabels.password}} <span class="text-danger">*</span></label>
+    <input type="password" class="form-control" id="password" aria-describedby="helpIdPassword"
+      [placeholder]="formPlaceholder.password" formControlName="password" (blur)="onValueChanges()"
+      [class]="{'is-valid': form['password'].valid, 'is-invalid': form['password'].invalid && (form['password'].dirty || form['password'].touched)}" />
+    <div *ngIf="form['password'].valid" class="valid-feedback">{{formSuccess.password}}</div>
+    <div *ngIf="form['password'].invalid && (form['password'].dirty || form['password'].touched)"
+      class="invalid-feedback">{{formErrors.password}}</div>
+    <small id="helpIdPassword" class="form-text text-muted">{{formHelpId.password}}</small>
+  </div>
+
+  <div class="mb-3">
+    <label for="confirmPassword" class="form-label">{{formLabels.confirmPassword}} <span
+        class="text-danger">*</span></label>
+    <input type="password" class="form-control" id="confirmPassword" aria-describedby="helpIdConfirmPassword"
+      [placeholder]="formPlaceholder.confirmPassword" formControlName="confirmPassword" (blur)="onValueChanges()"
+      [class]="{'is-valid': form['confirmPassword'].valid, 'is-invalid': form['confirmPassword'].invalid && (form['confirmPassword'].dirty || form['confirmPassword'].touched)}" />
+    <div *ngIf="form['confirmPassword'].valid" class="valid-feedback">{{formSuccess.confirmPassword}}</div>
+    <div *ngIf="form['confirmPassword'].invalid && (form['confirmPassword'].dirty || form['confirmPassword'].touched)"
+      class="invalid-feedback">{{formErrors.confirmPassword}}</div>
+    <small id="helpIdConfirmPassword" class="form-text text-muted">{{formHelpId.confirmPassword}}</small>
+  </div>
+
+  <div class="mb-3">
+    <label for="tel" class="form-label">{{formLabels.tel}} <span class="text-danger">*</span></label>
+    <input type="tel" class="form-control" id="tel" aria-describedby="helpIdTel" [placeholder]="formPlaceholder.tel"
+      formControlName="tel" (blur)="onValueChanges()"
+      [class]="{'is-valid': form['tel'].valid, 'is-invalid': form['tel'].invalid && (form['tel'].dirty || form['tel'].touched)}" />
+    <div *ngIf="form['tel'].valid" class="valid-feedback">{{formSuccess.tel}}</div>
+    <div *ngIf="form['tel'].invalid && (form['tel'].dirty || form['tel'].touched)" class="invalid-feedback">
+      {{formErrors.tel}}</div>
+    <small id="helpIdTel" class="form-text text-muted">{{formHelpId.tel}}</small>
+  </div>
+
+  <div class="mb-3">
+    <p>{{formLabels.checkboxes}} <span class="text-danger">*</span>
+    </p>
+    @for (checkbox of checkboxes; track checkbox) {
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="{{checkbox}}" aria-describedby="helpIdCheckboxes"
+        value="{{checkbox}}" formControlName="checkboxes" (blur)="onValueChanges()"
+        [class]="{'is-valid': form['checkboxes'].valid, 'is-invalid': form['checkboxes'].invalid && (form['checkboxes'].dirty || form['checkboxes'].touched)}" />
+      <label class="form-check-label" for="{{checkbox}}">{{checkbox}}</label>
+    </div>
+    }
+    <div *ngIf="form['checkboxes'].valid" class="valid-feedback">{{formSuccess.checkboxes}}</div>
+    <div *ngIf="form['checkboxes'].invalid && (form['checkboxes'].dirty || form['checkboxes'].touched)"
+      class="invalid-feedback">{{formErrors.checkboxes}}</div>
+    <small id="helpIdCheckboxes" class="form-text text-muted">{{formHelpId.checkboxes}}</small>
+  </div>
+
+  <div class="mb-3">
+    <label for="location" class="form-label">{{formLabels.location}} <span class="text-danger">*</span></label>
+    <select class="form-select" id="location" aria-describedby="helpIdLocation" formControlName="location"
+      (blur)="onValueChanges()"
+      [class]="{'is-valid': form['location'].valid, 'is-invalid': form['location'].invalid && (form['location'].dirty || form['location'].touched)}">
+      <option [value]="null" disabled selected>{{formPlaceholder.location}}</option>
+      @for (location of locations; track location)
+      {<option [value]="location">{{location}}</option>}
+    </select>
+    <div *ngIf="form['location'].valid" class="valid-feedback">{{formSuccess.location}}</div>
+    <div *ngIf="form['location'].invalid && (form['location'].dirty || form['location'].touched)"
+      class="invalid-feedback">{{formErrors.location}}</div>
+    <small id="helpIdLocation" class="form-text text-muted">{{formHelpId.location}}</small>
+  </div>
+
+  <div class="mb-3">
+    <label for="comment" class="form-label">{{formLabels.comment}} <span class="text-danger">*</span></label>
+    <textarea class="form-control" id="comment" aria-describedby="helpIdComment" [placeholder]="formPlaceholder.comment"
+      rows="3" formControlName="comment" (blur)="onValueChanges()"
+      [class]="{'is-valid': form['comment'].valid, 'is-invalid': form['comment'].invalid && (form['comment'].dirty || form['comment'].touched)}"></textarea>
+    <div *ngIf="form['comment'].valid" class="valid-feedback">{{formSuccess.comment}}</div>
+    <div *ngIf="form['comment'].invalid && (form['comment'].dirty || form['comment'].touched)" class="invalid-feedback">
+      {{formErrors.comment}}</div>
+    <small id="helpIdComment" class="form-text text-muted">{{formHelpId.comment}}</small>
+  </div>
+
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Save</button>
+  </div>
+
+</form>
