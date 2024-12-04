@@ -8,6 +8,5 @@ import { BootstrapTableComponent } from '../bootstrap-table/bootstrap-table.comp
   imports: [BootstrapFormComponent, BootstrapTableComponent],
   templateUrl: './bootstrap-layout.component.html',
   styleUrl: './bootstrap-layout.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BootstrapLayoutComponent {}

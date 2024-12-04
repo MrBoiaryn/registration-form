@@ -7,7 +7,7 @@ export class User {
     public password: string | null,
     public confirmPassword: string | null,
     public tel: number | null,
-    public сheckboxes: string[] | null,
+    public checkboxes: string[] | null,
     public location: string | null,
     public comment: string | null
   ) {}
