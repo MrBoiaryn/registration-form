@@ -22,11 +22,10 @@ import {
 } from '../../../shared/data/form-data';
 
 @Component({
-  selector: 'app-bootstrap-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './bootstrap-form.component.html',
-  styleUrl: './bootstrap-form.component.scss',
+    selector: 'app-bootstrap-form',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './bootstrap-form.component.html',
+    styleUrl: './bootstrap-form.component.scss'
 })
 export class BootstrapFormComponent implements OnInit {
   locations: string[] = FORM_LOCATIONS;

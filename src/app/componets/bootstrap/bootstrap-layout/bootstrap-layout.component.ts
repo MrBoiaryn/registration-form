@@ -3,10 +3,9 @@ import { BootstrapFormComponent } from '../bootstrap-form/bootstrap-form.compone
 import { BootstrapTableComponent } from '../bootstrap-table/bootstrap-table.component';
 
 @Component({
-  selector: 'app-bootstrap-layout',
-  standalone: true,
-  imports: [BootstrapFormComponent, BootstrapTableComponent],
-  templateUrl: './bootstrap-layout.component.html',
-  styleUrl: './bootstrap-layout.component.scss',
+    selector: 'app-bootstrap-layout',
+    imports: [BootstrapFormComponent, BootstrapTableComponent],
+    templateUrl: './bootstrap-layout.component.html',
+    styleUrl: './bootstrap-layout.component.scss'
 })
 export class BootstrapLayoutComponent {}
