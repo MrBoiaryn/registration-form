@@ -1,6 +1,6 @@
 export const FORM_LOCATIONS = ['Ukraine', 'Europe', 'America', 'Other'];
 
-export const FORM_METHOD = ['telegram', 'viber', 'watsapp', 'nothing'];
+export const FORM_CHECKBOXES = ['telegram', 'viber', 'watsapp', 'nothing'];
 
 export const FORM_LABELS = {
   name: 'First name and last name',

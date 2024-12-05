@@ -1,3 +1,15 @@
-:host {
-  display: block;
+.form {
+  max-width: 600px;
+  margin: auto;
+  text-align: start;
+  // padding-top: 20px;
+
+  mat-form-field{
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+.container-btn{
+  margin: 20px 0;
 }

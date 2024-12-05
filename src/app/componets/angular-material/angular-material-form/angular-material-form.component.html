@@ -1,1 +1,71 @@
-<p>angular-material-form works!</p>
+<h2>Angular-material registration form</h2>
+
+<form class="form" [formGroup]="userForm">
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{formLabels.name}}</mat-label>
+    <input type="text" matInput [placeholder]="formPlaceholder.name" formControlName="name">
+    <mat-hint>{{formHelpId.name}}</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{formLabels.companyName}}</mat-label>
+    <input type="text" matInput [placeholder]="formPlaceholder.companyName" formControlName="companyName">
+    <mat-hint>{{formHelpId.companyName}}</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{formLabels.email}}</mat-label>
+    <input type="email" matInput [placeholder]="formPlaceholder.email" formControlName="email">
+    <mat-hint>{{formHelpId.email}}</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{formLabels.password}}</mat-label>
+    <input type="password" matInput [placeholder]="formPlaceholder.password" formControlName="password">
+    <mat-hint>{{formHelpId.password}}</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{formLabels.confirmPassword}}</mat-label>
+    <input type="password" matInput [placeholder]="formPlaceholder.confirmPassword" formControlName="confirmPassword">
+    <mat-hint>{{formHelpId.confirmPassword}}</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{formLabels.tel}}</mat-label>
+    <input type="tel" matInput [placeholder]="formPlaceholder.tel" formControlName="tel">
+    <mat-hint>{{formHelpId.tel}}</mat-hint>
+  </mat-form-field>
+
+  <mat-label>{{formLabels.checkboxes}}</mat-label>
+  <section class="example-section">
+    @for (checkbox of checkboxes; track checkbox){
+    <mat-checkbox value="{{checkbox}}">{{checkbox}}</mat-checkbox>
+    }
+  </section>
+  <mat-hint>{{formHelpId.checkboxes}}</mat-hint>
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{formLabels.location}}</mat-label>
+    <mat-select formControlName="location">
+      @for (location of locations; track location) {
+      <mat-option [value]="location">{{location}}</mat-option>
+      }
+    </mat-select>
+    <mat-hint>{{formHelpId.location}}</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{formLabels.comment}}</mat-label>
+    <textarea formControlName="comment" cdkAutosizeMaxRows="3" matInput cdkTextareaAutosize
+      [placeholder]="formPlaceholder.comment" formControlName="comment"></textarea>
+    <mat-hint>{{formHelpId.comment}}</mat-hint>
+  </mat-form-field>
+
+  <div class="container-btn">
+    <button mat-flat-button (click)="addCase()">Save</button>
+  </div>
+
+</form>

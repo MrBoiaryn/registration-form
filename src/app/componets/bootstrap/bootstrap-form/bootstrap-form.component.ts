@@ -11,25 +11,25 @@ import {
 import { CommonModule } from '@angular/common';
 import { validatorsService } from '../../../shared/services/validators.service';
 import {
+  FORM_CHECKBOXES,
   FORM_ERRORS,
   FORM_HELPID,
   FORM_LABELS,
   FORM_LOCATIONS,
-  FORM_METHOD,
   FORM_PLACEHOLDER,
   FORM_SUCCESS,
   FORM_VALIDATION_MESSAGES,
 } from '../../../shared/data/form-data';
 
 @Component({
-    selector: 'app-bootstrap-form',
-    imports: [CommonModule, ReactiveFormsModule],
-    templateUrl: './bootstrap-form.component.html',
-    styleUrl: './bootstrap-form.component.scss'
+  selector: 'app-bootstrap-form',
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './bootstrap-form.component.html',
+  styleUrl: './bootstrap-form.component.scss',
 })
 export class BootstrapFormComponent implements OnInit {
   locations: string[] = FORM_LOCATIONS;
-  checkboxes: string[] = FORM_METHOD;
+  checkboxes: string[] = FORM_CHECKBOXES;
   formLabels = FORM_LABELS;
   formPlaceholder = FORM_PLACEHOLDER;
   formSuccess = FORM_SUCCESS;
