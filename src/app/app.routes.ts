@@ -5,4 +5,5 @@ import { AngularMaterialLayoutComponent } from './componets/angular-material/ang
 export const routes: Routes = [
   { path: 'angular', component: AngularMaterialLayoutComponent },
   { path: 'bootstrap', component: BootstrapLayoutComponent },
+  { path: '', redirectTo: '/angular', pathMatch: 'full' },
 ];

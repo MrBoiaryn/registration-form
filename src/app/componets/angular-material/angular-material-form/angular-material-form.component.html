@@ -1,6 +1,6 @@
 <h2>Angular-material registration form</h2>
 
-<form class="form" [formGroup]="userForm">
+<form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
   <mat-form-field appearance="outline">
     <mat-label>{{formLabels.name}}</mat-label>
@@ -65,7 +65,7 @@
   </mat-form-field>
 
   <div class="container-btn">
-    <button mat-flat-button (click)="addCase()">Save</button>
+    <button mat-flat-button (click)="addCase()" [disabled]="userForm.invalid">Save</button>
   </div>
 
 </form>

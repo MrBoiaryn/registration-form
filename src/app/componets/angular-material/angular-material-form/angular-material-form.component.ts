@@ -26,6 +26,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { HttpService } from '../../../shared/services/http.service';
+import { dataInterface } from '../../../shared/interface/data.interface';
 
 @Component({
   selector: 'app-angular-material-form',
@@ -54,9 +56,12 @@ export class AngularMaterialFormComponent {
 
   userForm!: FormGroup;
 
+  data: dataInterface[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
-    private validators: validatorsService
+    private validators: validatorsService,
+    private httpService: HttpService
   ) {}
 
   get form(): { [key: string]: AbstractControl } {
@@ -67,7 +72,20 @@ export class AngularMaterialFormComponent {
     this.initializeForm();
   }
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    this.httpService.createData(this.userForm.value).subscribe({
+      next: (res) => {
+        this.userForm.reset();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  createData(): void {
+    // this.httpService.createData();
+  }
 
   addCase(): void {
     console.log(this.userForm.value);
@@ -98,7 +116,7 @@ export class AngularMaterialFormComponent {
         Validators.required,
         Validators.pattern(/^\d+$/),
       ]),
-      checkboxes: new FormControl(null, [Validators.required]),
+      // checkboxes: new FormControl(null, [Validators.required]),
       location: new FormControl(null, [Validators.required]),
       comment: new FormControl(null, [Validators.required]),
     });

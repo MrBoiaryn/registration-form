@@ -1,0 +1,19 @@
+<h2>Table angular material</h2>
+
+<ul>
+  @for (data of httpService.data; track data; let i = $index){
+  <li>{{i +1}}</li>
+  <li>{{data.name}}</li>
+  <li>{{data.companyName}}</li>
+  <li>{{data.email}}</li>
+  <li>{{data.tel}}</li>
+  <!-- <li>{{data.checkboxes}}</li> -->
+  <li>
+    @for (checkbox of data.checkboxes; track checkbox){
+    <p class="checkboxes">{{checkbox}}</p>
+    }
+  </li>
+  <li>{{data.location}}</li>
+  <li>{{data.comment}}</li>
+  }
+</ul>
