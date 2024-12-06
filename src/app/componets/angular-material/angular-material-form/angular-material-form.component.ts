@@ -28,6 +28,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpService } from '../../../shared/services/http.service';
 import { dataInterface } from '../../../shared/interface/data.interface';
+import { requestInterface } from '../../../shared/interface/request.interface';
+import { tap } from 'rxjs';
+import { AngularMaterialTableComponent } from '../angular-material-table/angular-material-table.component';
 
 @Component({
   selector: 'app-angular-material-form',
@@ -40,6 +43,7 @@ import { dataInterface } from '../../../shared/interface/data.interface';
     MatCheckboxModule,
     MatSelectModule,
     MatButtonModule,
+    AngularMaterialTableComponent,
   ],
   templateUrl: './angular-material-form.component.html',
   styleUrl: './angular-material-form.component.scss',
@@ -70,25 +74,22 @@ export class AngularMaterialFormComponent {
 
   ngOnInit(): void {
     this.initializeForm();
+    this.httpService.readData().subscribe((res) => {
+      this.data = res;
+    });
   }
 
   onSubmit(): void {
     this.httpService.createData(this.userForm.value).subscribe({
-      next: (res) => {
+      next: (res: requestInterface) => {
+        this.data.push({ ...{ key: res.name }, ...this.userForm.value });
         this.userForm.reset();
+        this.data = [...this.data];
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err);
       },
     });
-  }
-
-  createData(): void {
-    // this.httpService.createData();
-  }
-
-  addCase(): void {
-    console.log(this.userForm.value);
   }
 
   private initializeForm(): void {

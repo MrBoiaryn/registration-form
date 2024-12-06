@@ -46,7 +46,6 @@
   </section>
   <mat-hint>{{formHelpId.checkboxes}}</mat-hint>
 
-
   <mat-form-field appearance="outline">
     <mat-label>{{formLabels.location}}</mat-label>
     <mat-select formControlName="location">
@@ -65,7 +64,9 @@
   </mat-form-field>
 
   <div class="container-btn">
-    <button mat-flat-button (click)="addCase()" [disabled]="userForm.invalid">Save</button>
+    <button mat-flat-button [disabled]="userForm.invalid">Save</button>
   </div>
 
 </form>
+
+<app-angular-material-table [data]="data"></app-angular-material-table>

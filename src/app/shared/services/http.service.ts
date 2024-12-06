@@ -16,41 +16,18 @@ export class HttpService {
   constructor(private httpClient: HttpClient) {}
 
   createData(data: dataInterface): Observable<requestInterface> {
-    return this.httpClient.post<requestInterface>(`${url}.json`, data).pipe(
-      tap((res) => {
-        this.data.push({ ...{ key: res.name }, ...data });
-      })
-    );
-    // .subscribe({
-    //   next: (res) => {
-    //     data.key = res.name;
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //   },
-    // });
+    return this.httpClient.post<requestInterface>(`${url}.json`, data);
   }
 
-  readData(): void {
-    this.httpClient
-      .get<responseInterface>(`${url}.json`)
-      .pipe(
-        map((res) => {
-          const arr: dataInterface[] = [];
-          Object.keys(res).forEach((key) => {
-            arr.push({ key, ...res[key] });
-          });
-          return arr;
-        })
-      )
-      .subscribe({
-        next: (res) => {
-          this.data = res;
-          console.log(this.data);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+  readData() {
+    return this.httpClient.get<responseInterface>(`${url}.json`).pipe(
+      map((res) => {
+        const arr: dataInterface[] = [];
+        Object.keys(res).forEach((key) => {
+          arr.push({ key, ...res[key] });
+        });
+        return arr;
+      })
+    );
   }
 }
