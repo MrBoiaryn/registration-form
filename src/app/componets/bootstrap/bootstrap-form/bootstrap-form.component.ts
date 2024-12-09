@@ -21,10 +21,13 @@ import {
   FORM_VALIDATION_MESSAGES,
 } from '../../../shared/data/form-data';
 import { HttpService } from '../../../shared/services/http.service';
+import { dataInterface } from '../../../shared/interface/data.interface';
+import { requestInterface } from '../../../shared/interface/request.interface';
+import { BootstrapTableComponent } from '../bootstrap-table/bootstrap-table.component';
 
 @Component({
   selector: 'app-bootstrap-form',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, BootstrapTableComponent],
   templateUrl: './bootstrap-form.component.html',
   styleUrl: './bootstrap-form.component.scss',
 })
@@ -40,10 +43,12 @@ export class BootstrapFormComponent implements OnInit {
 
   userForm!: FormGroup;
 
+  data: dataInterface[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private validators: validatorsService,
-    private http: HttpService
+    private httpService: HttpService
   ) {}
 
   get form(): { [key: string]: AbstractControl } {
@@ -52,9 +57,23 @@ export class BootstrapFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
+    this.httpService.readData().subscribe((res) => {
+      this.data = res;
+    });
   }
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    this.httpService.createData(this.userForm.value).subscribe({
+      next: (res: requestInterface) => {
+        this.data.push({ ...{ key: res.name }, ...this.userForm.value });
+        this.userForm.reset();
+        this.data = [...this.data];
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
 
   private initializeForm(): void {
     this.userForm = this.formBuilder.group({
