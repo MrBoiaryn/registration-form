@@ -14,6 +14,9 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  FormGroupDirective,
+  FormsModule,
+  NgForm,
   ReactiveFormsModule,
   ValidationErrors,
   Validators,
@@ -31,6 +34,7 @@ import { dataInterface } from '../../../shared/interface/data.interface';
 import { requestInterface } from '../../../shared/interface/request.interface';
 import { tap } from 'rxjs';
 import { AngularMaterialTableComponent } from '../angular-material-table/angular-material-table.component';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-angular-material-form',
@@ -44,6 +48,7 @@ import { AngularMaterialTableComponent } from '../angular-material-table/angular
     MatSelectModule,
     MatButtonModule,
     AngularMaterialTableComponent,
+    FormsModule,
   ],
   templateUrl: './angular-material-form.component.html',
   styleUrl: './angular-material-form.component.scss',
@@ -94,14 +99,11 @@ export class AngularMaterialFormComponent {
 
   private initializeForm(): void {
     this.userForm = this.formBuilder.group({
-      name: [
-        null,
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(30),
-        ],
-      ],
+      name: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30),
+      ]),
       companyName: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [
         Validators.required,
@@ -124,6 +126,42 @@ export class AngularMaterialFormComponent {
     this.userForm.valueChanges?.subscribe(() => this.onValueChanges());
   }
 
+  get name() {
+    return this.userForm.get('name');
+  }
+
+  get companyName() {
+    return this.userForm.get('companyName');
+  }
+
+  get email() {
+    return this.userForm.get('email');
+  }
+
+  get password() {
+    return this.userForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.userForm.get('confirmPassword');
+  }
+
+  get tel() {
+    return this.userForm.get('tel');
+  }
+
+  // get checkboxes() {
+  //   return this.userForm.get('checkboxes');
+  // }
+
+  get location() {
+    return this.userForm.get('location');
+  }
+
+  get comment() {
+    return this.userForm.get('comment');
+  }
+
   onValueChanges(): void {
     const form = this.userForm;
 
@@ -138,5 +176,21 @@ export class AngularMaterialFormComponent {
         });
       }
     });
+  }
+
+  matcher = new MyErrorStateMatcher();
+}
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
   }
 }

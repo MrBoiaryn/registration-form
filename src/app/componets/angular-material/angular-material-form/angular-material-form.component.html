@@ -5,37 +5,59 @@
   <mat-form-field appearance="outline">
     <mat-label>{{formLabels.name}}</mat-label>
     <input type="text" matInput [placeholder]="formPlaceholder.name" formControlName="name">
-    <mat-hint>{{formHelpId.name}}</mat-hint>
+    <mat-hint class="valid" *ngIf="!name?.hasError('required') && !name?.hasError('minlength') &&
+    !name?.hasError('maxlength')">{{formSuccess.name}}</mat-hint>
+    <mat-error *ngIf="name?.hasError('required')">{{validationMessages.name.required}}</mat-error>
+    <mat-error *ngIf="name?.hasError('minlength')">{{validationMessages.name.minlength}}</mat-error>
+    <mat-error *ngIf="name?.hasError('maxlength')">{{validationMessages.name.maxlength}}</mat-error>
+    <mat-hint *ngIf="name?.pristine">{{formHelpId.name}}</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>{{formLabels.companyName}}</mat-label>
     <input type="text" matInput [placeholder]="formPlaceholder.companyName" formControlName="companyName">
-    <mat-hint>{{formHelpId.companyName}}</mat-hint>
+    <mat-hint class="valid" *ngIf="!companyName?.hasError('required')">{{formSuccess.companyName}}</mat-hint>
+    <mat-error *ngIf="companyName?.hasError('required')">{{validationMessages.companyName.required}}</mat-error>
+    <mat-hint *ngIf="companyName?.pristine">{{formHelpId.companyName}}</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>{{formLabels.email}}</mat-label>
     <input type="email" matInput [placeholder]="formPlaceholder.email" formControlName="email">
-    <mat-hint>{{formHelpId.email}}</mat-hint>
+    <mat-hint class="valid"
+      *ngIf="!email?.hasError('required') && !email?.hasError('emailValidator')">{{formSuccess.email}}</mat-hint>
+    <mat-error *ngIf="email?.hasError('required')">{{validationMessages.email.required}}</mat-error>
+    <mat-error
+      *ngIf="email?.hasError('emailValidator') && !email?.hasError('required')">{{validationMessages.email.emailValidator}}</mat-error>
+    <mat-hint *ngIf="email?.pristine">{{formHelpId.email}}</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>{{formLabels.password}}</mat-label>
     <input type="password" matInput [placeholder]="formPlaceholder.password" formControlName="password">
-    <mat-hint>{{formHelpId.password}}</mat-hint>
+    <mat-hint class="valid"
+      *ngIf="!password?.hasError('required') && !password?.hasError('minLength') && !password?.hasError('maxLength')">{{formSuccess.password}}</mat-hint>
+    <mat-error *ngIf="password?.hasError('required')">{{validationMessages.password.required}}</mat-error>
+    <mat-error *ngIf="password?.hasError('minlength')">{{validationMessages.password.minlength}}</mat-error>
+    <mat-error *ngIf="password?.hasError('maxlength')">{{validationMessages.password.maxlength}}</mat-error>
+    <mat-hint *ngIf="password?.pristine">{{formHelpId.password}}</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>{{formLabels.confirmPassword}}</mat-label>
     <input type="password" matInput [placeholder]="formPlaceholder.confirmPassword" formControlName="confirmPassword">
-    <mat-hint>{{formHelpId.confirmPassword}}</mat-hint>
+    <mat-error *ngIf="confirmPassword?.hasError('required')">{{validationMessages.confirmPassword.required}}</mat-error>
+    <mat-hint *ngIf="confirmPassword?.pristine">{{formHelpId.confirmPassword}}</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>{{formLabels.tel}}</mat-label>
     <input type="tel" matInput [placeholder]="formPlaceholder.tel" formControlName="tel">
-    <mat-hint>{{formHelpId.tel}}</mat-hint>
+    <mat-hint class="valid"
+      *ngIf="!tel?.hasError('required') && !tel?.hasError('pattern')">{{formSuccess.tel}}</mat-hint>
+    <mat-error *ngIf="tel?.hasError('required')">{{validationMessages.tel.required}}</mat-error>
+    <mat-error *ngIf="tel?.hasError('pattern')">{{validationMessages.tel.pattern}}</mat-error>
+    <mat-hint *ngIf="tel?.pristine">{{formHelpId.tel}}</mat-hint>
   </mat-form-field>
 
   <mat-label>{{formLabels.checkboxes}}</mat-label>
@@ -53,14 +75,18 @@
       <mat-option [value]="location">{{location}}</mat-option>
       }
     </mat-select>
-    <mat-hint>{{formHelpId.location}}</mat-hint>
+    <mat-hint class="valid" *ngIf="!location?.hasError('required')">{{formSuccess.location}}</mat-hint>
+    <mat-error *ngIf="location?.hasError('required')">{{validationMessages.location.required}}</mat-error>
+    <mat-hint *ngIf="location?.pristine">{{formHelpId.location}}</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>{{formLabels.comment}}</mat-label>
     <textarea formControlName="comment" cdkAutosizeMaxRows="3" matInput cdkTextareaAutosize
       [placeholder]="formPlaceholder.comment" formControlName="comment"></textarea>
-    <mat-hint>{{formHelpId.comment}}</mat-hint>
+    <mat-hint class="valid" *ngIf="!comment?.hasError('required')">{{formSuccess.comment}}</mat-hint>
+    <mat-error *ngIf="comment?.hasError('required')">{{validationMessages.comment.required}}</mat-error>
+    <mat-hint *ngIf="comment?.pristine">{{formHelpId.comment}}</mat-hint>
   </mat-form-field>
 
   <div class="container-btn">
