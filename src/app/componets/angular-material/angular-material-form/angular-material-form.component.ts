@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, Component, Input, OnInit } from '@angular/core';
 import {
   FORM_CHECKBOXES,
   FORM_ERRORS,
@@ -21,7 +21,10 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { validatorsService } from '../../../shared/services/validators.service';
+import {
+  MatchingPasswords,
+  validatorsService,
+} from '../../../shared/services/validators.service';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -32,9 +35,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpService } from '../../../shared/services/http.service';
 import { dataInterface } from '../../../shared/interface/data.interface';
 import { requestInterface } from '../../../shared/interface/request.interface';
-import { tap } from 'rxjs';
 import { AngularMaterialTableComponent } from '../angular-material-table/angular-material-table.component';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { BootstrapTableComponent } from '../../bootstrap/bootstrap-table/bootstrap-table.component';
 
 @Component({
   selector: 'app-angular-material-form',
@@ -49,11 +52,12 @@ import { ErrorStateMatcher } from '@angular/material/core';
     MatButtonModule,
     AngularMaterialTableComponent,
     FormsModule,
+    BootstrapTableComponent,
   ],
   templateUrl: './angular-material-form.component.html',
   styleUrl: './angular-material-form.component.scss',
 })
-export class AngularMaterialFormComponent {
+export class AngularMaterialFormComponent implements OnInit {
   locations: string[] = FORM_LOCATIONS;
   checkboxes: string[] = FORM_CHECKBOXES;
   formLabels = FORM_LABELS;
@@ -66,6 +70,8 @@ export class AngularMaterialFormComponent {
   userForm!: FormGroup;
 
   data: dataInterface[] = [];
+
+  @Input() isMaterial!: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -114,7 +120,10 @@ export class AngularMaterialFormComponent {
         Validators.minLength(6),
         Validators.maxLength(20),
       ]),
-      confirmPassword: new FormControl(null, [Validators.required]),
+      confirmPassword: new FormControl(null, [
+        Validators.required,
+        MatchingPasswords('password'),
+      ]),
       tel: new FormControl(null, [
         Validators.required,
         Validators.pattern(/^\d+$/),
@@ -176,21 +185,5 @@ export class AngularMaterialFormComponent {
         });
       }
     });
-  }
-
-  matcher = new MyErrorStateMatcher();
-}
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(
-      control &&
-      control.invalid &&
-      (control.dirty || control.touched || isSubmitted)
-    );
   }
 }

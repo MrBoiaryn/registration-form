@@ -18,3 +18,15 @@ export class validatorsService {
     return null;
   }
 }
+
+export function MatchingPasswords(controlName: string) {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const passwordControl = control.parent?.get(controlName);
+    if (!passwordControl) {
+      return null;
+    }
+    const password = control.value;
+    const confirmPassword = passwordControl.value;
+    return password !== confirmPassword ? { notMatching: true } : null;
+  };
+}

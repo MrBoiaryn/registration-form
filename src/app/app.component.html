@@ -3,10 +3,16 @@
     <div class="col">
       <h1>Registration form</h1>
       <div class="container-btn">
-        <button mat-flat-button routerLink="/angular">Anrular material</button>
-        <button type="button" class="btn btn-primary" routerLink="/bootstrap">Bootstrap</button>
+        <button mat-flat-button (click)="setIsMaterial(true)">Anrular material</button>
+        <button type="button" class="btn btn-primary" (click)="setIsMaterial(false)">Bootstrap</button>
       </div>
-      <router-outlet></router-outlet>
+      <!-- <router-outlet></router-outlet> -->
+      <app-angular-material-form [isMaterial]="isMaterial"></app-angular-material-form>
     </div>
   </div>
 </div>
+
+<!-- <div class="container-btn">
+  <button mat-flat-button routerLink="/angular">Anrular material</button>
+  <button type="button" class="btn btn-primary" routerLink="/bootstrap">Bootstrap</button>
+</div> -->

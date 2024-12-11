@@ -71,7 +71,7 @@ export const FORM_VALIDATION_MESSAGES = {
   },
   confirmPassword: {
     required: 'Confirm password is required.',
-    mustMatch: 'Passwords must match.',
+    matchPass: 'Passwords must match.',
   },
   tel: {
     required: 'Phone number is required.',

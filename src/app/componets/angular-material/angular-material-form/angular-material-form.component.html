@@ -1,98 +1,225 @@
-<h2>Angular-material registration form</h2>
+<div *ngIf="isMaterial; else bootstrapForm">
+  <h2>Angular-material registration form</h2>
 
-<form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
-  <mat-form-field appearance="outline">
-    <mat-label>{{formLabels.name}}</mat-label>
-    <input type="text" matInput [placeholder]="formPlaceholder.name" formControlName="name">
-    <mat-hint class="valid" *ngIf="!name?.hasError('required') && !name?.hasError('minlength') &&
-    !name?.hasError('maxlength')">{{formSuccess.name}}</mat-hint>
-    <mat-error *ngIf="name?.hasError('required')">{{validationMessages.name.required}}</mat-error>
-    <mat-error *ngIf="name?.hasError('minlength')">{{validationMessages.name.minlength}}</mat-error>
-    <mat-error *ngIf="name?.hasError('maxlength')">{{validationMessages.name.maxlength}}</mat-error>
-    <mat-hint *ngIf="name?.pristine">{{formHelpId.name}}</mat-hint>
-  </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{formLabels.name}}</mat-label>
+      <input type="text" matInput [placeholder]="formPlaceholder.name" formControlName="name">
+      <mat-hint class="valid" *ngIf="!name?.hasError('required') && !name?.hasError('minlength') &&
+      !name?.hasError('maxlength')">{{formSuccess.name}}</mat-hint>
+      <mat-error *ngIf="name?.hasError('required')">{{validationMessages.name.required}}</mat-error>
+      <mat-error *ngIf="name?.hasError('minlength')">{{validationMessages.name.minlength}}</mat-error>
+      <mat-error *ngIf="name?.hasError('maxlength')">{{validationMessages.name.maxlength}}</mat-error>
+      <mat-hint *ngIf="name?.pristine">{{formHelpId.name}}</mat-hint>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>{{formLabels.companyName}}</mat-label>
-    <input type="text" matInput [placeholder]="formPlaceholder.companyName" formControlName="companyName">
-    <mat-hint class="valid" *ngIf="!companyName?.hasError('required')">{{formSuccess.companyName}}</mat-hint>
-    <mat-error *ngIf="companyName?.hasError('required')">{{validationMessages.companyName.required}}</mat-error>
-    <mat-hint *ngIf="companyName?.pristine">{{formHelpId.companyName}}</mat-hint>
-  </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{formLabels.companyName}}</mat-label>
+      <input type="text" matInput [placeholder]="formPlaceholder.companyName" formControlName="companyName">
+      <mat-hint class="valid" *ngIf="!companyName?.hasError('required')">{{formSuccess.companyName}}</mat-hint>
+      <mat-error *ngIf="companyName?.hasError('required')">{{validationMessages.companyName.required}}</mat-error>
+      <mat-hint *ngIf="companyName?.pristine">{{formHelpId.companyName}}</mat-hint>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>{{formLabels.email}}</mat-label>
-    <input type="email" matInput [placeholder]="formPlaceholder.email" formControlName="email">
-    <mat-hint class="valid"
-      *ngIf="!email?.hasError('required') && !email?.hasError('emailValidator')">{{formSuccess.email}}</mat-hint>
-    <mat-error *ngIf="email?.hasError('required')">{{validationMessages.email.required}}</mat-error>
-    <mat-error
-      *ngIf="email?.hasError('emailValidator') && !email?.hasError('required')">{{validationMessages.email.emailValidator}}</mat-error>
-    <mat-hint *ngIf="email?.pristine">{{formHelpId.email}}</mat-hint>
-  </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{formLabels.email}}</mat-label>
+      <input type="email" matInput [placeholder]="formPlaceholder.email" formControlName="email">
+      <mat-hint class="valid"
+        *ngIf="!email?.hasError('required') && !email?.hasError('emailValidator')">{{formSuccess.email}}</mat-hint>
+      <mat-error *ngIf="email?.hasError('required')">{{validationMessages.email.required}}</mat-error>
+      <mat-error
+        *ngIf="email?.hasError('emailValidator') && !email?.hasError('required')">{{validationMessages.email.emailValidator}}</mat-error>
+      <mat-hint *ngIf="email?.pristine">{{formHelpId.email}}</mat-hint>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>{{formLabels.password}}</mat-label>
-    <input type="password" matInput [placeholder]="formPlaceholder.password" formControlName="password">
-    <mat-hint class="valid"
-      *ngIf="!password?.hasError('required') && !password?.hasError('minLength') && !password?.hasError('maxLength')">{{formSuccess.password}}</mat-hint>
-    <mat-error *ngIf="password?.hasError('required')">{{validationMessages.password.required}}</mat-error>
-    <mat-error *ngIf="password?.hasError('minlength')">{{validationMessages.password.minlength}}</mat-error>
-    <mat-error *ngIf="password?.hasError('maxlength')">{{validationMessages.password.maxlength}}</mat-error>
-    <mat-hint *ngIf="password?.pristine">{{formHelpId.password}}</mat-hint>
-  </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{formLabels.password}}</mat-label>
+      <input type="password" matInput [placeholder]="formPlaceholder.password" formControlName="password">
+      <mat-hint class="valid"
+        *ngIf="!(password?.hasError('required') && password?.hasError('minLength') && password?.hasError('maxLength')) && !password?.pristine && password?.dirty && (password?.value.length > 5)">{{formSuccess.password}}</mat-hint>
+      <mat-error *ngIf="password?.hasError('required')">{{validationMessages.password.required}}</mat-error>
+      <mat-error *ngIf="password?.hasError('minlength')">{{validationMessages.password.minlength}}</mat-error>
+      <mat-error *ngIf="password?.hasError('maxlength')">{{validationMessages.password.maxlength}}</mat-error>
+      <mat-hint *ngIf="password?.pristine">{{formHelpId.password}}</mat-hint>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>{{formLabels.confirmPassword}}</mat-label>
-    <input type="password" matInput [placeholder]="formPlaceholder.confirmPassword" formControlName="confirmPassword">
-    <mat-error *ngIf="confirmPassword?.hasError('required')">{{validationMessages.confirmPassword.required}}</mat-error>
-    <mat-hint *ngIf="confirmPassword?.pristine">{{formHelpId.confirmPassword}}</mat-hint>
-  </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{formLabels.confirmPassword}}</mat-label>
+      <input type="password" matInput [placeholder]="formPlaceholder.confirmPassword" formControlName="confirmPassword">
+      <mat-hint class="valid"
+        *ngIf="!confirmPassword?.hasError('required') && !confirmPassword?.hasError('notMatching')">{{formSuccess.confirmPassword}}</mat-hint>
+      <mat-error
+        *ngIf="confirmPassword?.hasError('required') && !confirmPassword?.hasError('notMatching')">{{validationMessages.confirmPassword.required}}</mat-error>
+      <mat-error
+        *ngIf="confirmPassword?.hasError('notMatching')">{{validationMessages.confirmPassword.matchPass}}</mat-error>
+      <mat-hint *ngIf="confirmPassword?.pristine">{{formHelpId.confirmPassword}}</mat-hint>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>{{formLabels.tel}}</mat-label>
-    <input type="tel" matInput [placeholder]="formPlaceholder.tel" formControlName="tel">
-    <mat-hint class="valid"
-      *ngIf="!tel?.hasError('required') && !tel?.hasError('pattern')">{{formSuccess.tel}}</mat-hint>
-    <mat-error *ngIf="tel?.hasError('required')">{{validationMessages.tel.required}}</mat-error>
-    <mat-error *ngIf="tel?.hasError('pattern')">{{validationMessages.tel.pattern}}</mat-error>
-    <mat-hint *ngIf="tel?.pristine">{{formHelpId.tel}}</mat-hint>
-  </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{formLabels.tel}}</mat-label>
+      <input type="tel" matInput [placeholder]="formPlaceholder.tel" formControlName="tel">
+      <mat-hint class="valid"
+        *ngIf="!tel?.hasError('required') && !tel?.hasError('pattern')">{{formSuccess.tel}}</mat-hint>
+      <mat-error *ngIf="tel?.hasError('required')">{{validationMessages.tel.required}}</mat-error>
+      <mat-error *ngIf="tel?.hasError('pattern')">{{validationMessages.tel.pattern}}</mat-error>
+      <mat-hint *ngIf="tel?.pristine">{{formHelpId.tel}}</mat-hint>
+    </mat-form-field>
 
-  <mat-label>{{formLabels.checkboxes}}</mat-label>
-  <section class="example-section">
-    @for (checkbox of checkboxes; track checkbox){
-    <mat-checkbox value="{{checkbox}}">{{checkbox}}</mat-checkbox>
-    }
-  </section>
-  <mat-hint>{{formHelpId.checkboxes}}</mat-hint>
-
-  <mat-form-field appearance="outline">
-    <mat-label>{{formLabels.location}}</mat-label>
-    <mat-select formControlName="location">
-      @for (location of locations; track location) {
-      <mat-option [value]="location">{{location}}</mat-option>
+    <mat-label>{{formLabels.checkboxes}}</mat-label>
+    <section class="example-section">
+      @for (checkbox of checkboxes; track checkbox){
+      <mat-checkbox value="{{checkbox}}">{{checkbox}}</mat-checkbox>
       }
-    </mat-select>
-    <mat-hint class="valid" *ngIf="!location?.hasError('required')">{{formSuccess.location}}</mat-hint>
-    <mat-error *ngIf="location?.hasError('required')">{{validationMessages.location.required}}</mat-error>
-    <mat-hint *ngIf="location?.pristine">{{formHelpId.location}}</mat-hint>
-  </mat-form-field>
+    </section>
+    <mat-hint>{{formHelpId.checkboxes}}</mat-hint>
 
-  <mat-form-field appearance="outline">
-    <mat-label>{{formLabels.comment}}</mat-label>
-    <textarea formControlName="comment" cdkAutosizeMaxRows="3" matInput cdkTextareaAutosize
-      [placeholder]="formPlaceholder.comment" formControlName="comment"></textarea>
-    <mat-hint class="valid" *ngIf="!comment?.hasError('required')">{{formSuccess.comment}}</mat-hint>
-    <mat-error *ngIf="comment?.hasError('required')">{{validationMessages.comment.required}}</mat-error>
-    <mat-hint *ngIf="comment?.pristine">{{formHelpId.comment}}</mat-hint>
-  </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{formLabels.location}}</mat-label>
+      <mat-select formControlName="location">
+        @for (location of locations; track location) {
+        <mat-option [value]="location">{{location}}</mat-option>
+        }
+      </mat-select>
+      <mat-hint class="valid" *ngIf="!location?.hasError('required')">{{formSuccess.location}}</mat-hint>
+      <mat-error *ngIf="location?.hasError('required')">{{validationMessages.location.required}}</mat-error>
+      <mat-hint *ngIf="location?.pristine">{{formHelpId.location}}</mat-hint>
+    </mat-form-field>
 
-  <div class="container-btn">
-    <button mat-flat-button [disabled]="userForm.invalid">Save</button>
-  </div>
+    <mat-form-field appearance="outline">
+      <mat-label>{{formLabels.comment}}</mat-label>
+      <textarea formControlName="comment" cdkAutosizeMaxRows="3" matInput cdkTextareaAutosize
+        [placeholder]="formPlaceholder.comment" formControlName="comment"></textarea>
+      <mat-hint class="valid" *ngIf="!comment?.hasError('required')">{{formSuccess.comment}}</mat-hint>
+      <mat-error *ngIf="comment?.hasError('required')">{{validationMessages.comment.required}}</mat-error>
+      <mat-hint *ngIf="comment?.pristine">{{formHelpId.comment}}</mat-hint>
+    </mat-form-field>
 
-</form>
+    <div class="container-btn">
+      <button mat-flat-button [disabled]="userForm.invalid">Save</button>
+    </div>
 
-<app-angular-material-table [data]="data"></app-angular-material-table>
+  </form>
+
+  <app-angular-material-table [data]="data"></app-angular-material-table>
+</div>
+
+<ng-template #bootstrapForm>
+  <h2 class="my-3">Bootstrap registration form</h2>
+
+  <form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+    <div class="mb-3">
+      <label for="name" class="form-label">{{formLabels.name}} <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" id="name" aria-describedby="helpIdName"
+        [placeholder]="formPlaceholder.name" formControlName="name" (blur)="onValueChanges()"
+        [class]="{'is-valid': name?.valid, 'is-invalid': name?.invalid && (name?.dirty || name?.touched)}" />
+      <div *ngIf="name?.valid" class="valid-feedback">{{formSuccess.name}}</div>
+      <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="invalid-feedback">
+        {{formErrors.name}}</div>
+      <small id="helpIdName" class="form-text text-muted">{{formHelpId.name}}</small>
+    </div>
+
+    <div class="mb-3">
+      <label for="companyName" class="form-label">{{formLabels.companyName}} <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" id="companyName" aria-describedby="helpIdCompanyName"
+        [placeholder]="formPlaceholder.companyName" formControlName="companyName" (blur)="onValueChanges()"
+        [class]="{'is-valid': companyName?.valid, 'is-invalid': companyName?.invalid && (companyName?.dirty || companyName?.touched)}" />
+      <div *ngIf="companyName?.valid" class="valid-feedback">{{formSuccess.companyName}}</div>
+      <div *ngIf="companyName?.invalid && (companyName?.dirty || companyName?.touched)" class="invalid-feedback">
+        {{formErrors.companyName}}</div>
+      <small id="helpIdCompanyName" class="form-text text-muted">{{formHelpId.companyName}}</small>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">{{formLabels.email}} <span class="text-danger">*</span></label>
+      <input type="email" class="form-control" id="email" aria-describedby="helpIdEmail"
+        [placeholder]="formPlaceholder.email" formControlName="email" (blur)="onValueChanges()"
+        [class]="{'is-valid': email?.valid, 'is-invalid': email?.invalid && (email?.dirty || email?.touched)}" />
+      <div *ngIf="email?.valid" class="valid-feedback">{{formSuccess.email}}</div>
+      <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="invalid-feedback">
+        {{formErrors.email}}</div>
+      <small id="helpIdEmail" class="form-text text-muted">{{formHelpId.email}}</small>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">{{formLabels.password}} <span class="text-danger">*</span></label>
+      <input type="password" class="form-control" id="password" aria-describedby="helpIdPassword"
+        [placeholder]="formPlaceholder.password" formControlName="password" (blur)="onValueChanges()"
+        [class]="{'is-valid': password?.valid, 'is-invalid': password?.invalid && (password?.dirty || password?.touched)}" />
+      <div *ngIf="password?.valid" class="valid-feedback">{{formSuccess.password}}</div>
+      <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="invalid-feedback">
+        {{formErrors.password}}</div>
+      <small id="helpIdPassword" class="form-text text-muted">{{formHelpId.password}}</small>
+    </div>
+
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">{{formLabels.confirmPassword}} <span
+          class="text-danger">*</span></label>
+      <input type="password" class="form-control" id="confirmPassword" aria-describedby="helpIdConfirmPassword"
+        [placeholder]="formPlaceholder.confirmPassword" formControlName="confirmPassword" (blur)="onValueChanges()"
+        [class]="{'is-valid': confirmPassword?.valid, 'is-invalid': confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)}" />
+      <div *ngIf="confirmPassword?.valid" class="valid-feedback">{{formSuccess.confirmPassword}}</div>
+      <div *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)"
+        class="invalid-feedback">{{formErrors.confirmPassword}}</div>
+      <small id="helpIdConfirmPassword" class="form-text text-muted">{{formHelpId.confirmPassword}}</small>
+    </div>
+
+    <div class="mb-3">
+      <label for="tel" class="form-label">{{formLabels.tel}} <span class="text-danger">*</span></label>
+      <input type="tel" class="form-control" id="tel" aria-describedby="helpIdTel" [placeholder]="formPlaceholder.tel"
+        formControlName="tel" (blur)="onValueChanges()"
+        [class]="{'is-valid': tel?.valid, 'is-invalid': tel?.invalid && (tel?.dirty || tel?.touched)}" />
+      <div *ngIf="tel?.valid" class="valid-feedback">{{formSuccess.tel}}</div>
+      <div *ngIf="tel?.invalid && (tel?.dirty || tel?.touched)" class="invalid-feedback">
+        {{formErrors.tel}}</div>
+      <small id="helpIdTel" class="form-text text-muted">{{formHelpId.tel}}</small>
+    </div>
+
+    <div class="mb-3">
+      <p>{{formLabels.checkboxes}} <span class="text-danger">*</span>
+      </p>
+      @for (checkbox of checkboxes; track checkbox) {
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="{{checkbox}}" aria-describedby="helpIdCheckboxes"
+          value="{{checkbox}}" />
+        <label class="form-check-label" for="{{checkbox}}">{{checkbox}}</label>
+      </div>
+      }
+      <small id="helpIdCheckboxes" class="form-text text-muted">{{formHelpId.checkboxes}}</small>
+    </div>
+
+    <div class="mb-3">
+      <label for="location" class="form-label">{{formLabels.location}} <span class="text-danger">*</span></label>
+      <select class="form-select" id="location" aria-describedby="helpIdLocation" formControlName="location"
+        (blur)="onValueChanges()"
+        [class]="{'is-valid': location?.valid, 'is-invalid': location?.invalid && (location?.dirty || location?.touched)}">
+        <option [value]="null" disabled selected>{{formPlaceholder.location}}</option>
+        @for (location of locations; track location)
+        {<option [value]="location">{{location}}</option>}
+      </select>
+      <div *ngIf="location?.valid" class="valid-feedback">{{formSuccess.location}}</div>
+      <div *ngIf="location?.invalid && (location?.dirty || location?.touched)" class="invalid-feedback">
+        {{formErrors.location}}</div>
+      <small id="helpIdLocation" class="form-text text-muted">{{formHelpId.location}}</small>
+    </div>
+
+    <div class="mb-3">
+      <label for="comment" class="form-label">{{formLabels.comment}} <span class="text-danger">*</span></label>
+      <textarea class="form-control" id="comment" aria-describedby="helpIdComment"
+        [placeholder]="formPlaceholder.comment" rows="3" formControlName="comment" (blur)="onValueChanges()"
+        [class]="{'is-valid': comment?.valid, 'is-invalid': comment?.invalid && (comment?.dirty || comment?.touched)}"></textarea>
+      <div *ngIf="comment?.valid" class="valid-feedback">{{formSuccess.comment}}</div>
+      <div *ngIf="comment?.invalid && (comment?.dirty || comment?.touched)" class="invalid-feedback">
+        {{formErrors.comment}}</div>
+      <small id="helpIdComment" class="form-text text-muted">{{formHelpId.comment}}</small>
+    </div>
+
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Save</button>
+    </div>
+
+  </form>
+
+  <app-bootstrap-table [data]="data"></app-bootstrap-table>
+</ng-template>

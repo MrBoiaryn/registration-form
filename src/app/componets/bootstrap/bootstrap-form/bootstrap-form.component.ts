@@ -23,11 +23,10 @@ import {
 import { HttpService } from '../../../shared/services/http.service';
 import { dataInterface } from '../../../shared/interface/data.interface';
 import { requestInterface } from '../../../shared/interface/request.interface';
-import { BootstrapTableComponent } from '../bootstrap-table/bootstrap-table.component';
 
 @Component({
   selector: 'app-bootstrap-form',
-  imports: [CommonModule, ReactiveFormsModule, BootstrapTableComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './bootstrap-form.component.html',
   styleUrl: './bootstrap-form.component.scss',
 })
