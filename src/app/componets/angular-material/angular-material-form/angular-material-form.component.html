@@ -3,6 +3,8 @@
 
   <form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
+
+
     <mat-form-field appearance="outline">
       <mat-label>{{formLabels.name}}</mat-label>
       <input type="text" matInput [placeholder]="formPlaceholder.name" formControlName="name">
@@ -56,7 +58,10 @@
       <mat-hint *ngIf="confirmPassword?.pristine">{{formHelpId.confirmPassword}}</mat-hint>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <ngx-material-intl-tel-input fieldControlName="tel" [required]="true" [autoIpLookup]="true">
+    </ngx-material-intl-tel-input>
+
+    <!-- <mat-form-field appearance="outline">
       <mat-label>{{formLabels.tel}}</mat-label>
       <input type="tel" matInput [placeholder]="formPlaceholder.tel" formControlName="tel">
       <mat-hint class="valid"
@@ -64,7 +69,7 @@
       <mat-error *ngIf="tel?.hasError('required')">{{validationMessages.tel.required}}</mat-error>
       <mat-error *ngIf="tel?.hasError('pattern')">{{validationMessages.tel.pattern}}</mat-error>
       <mat-hint *ngIf="tel?.pristine">{{formHelpId.tel}}</mat-hint>
-    </mat-form-field>
+    </mat-form-field> -->
 
     <mat-label>{{formLabels.checkboxes}}</mat-label>
     <section class="example-section">
@@ -165,7 +170,10 @@
       <small id="helpIdConfirmPassword" class="form-text text-muted">{{formHelpId.confirmPassword}}</small>
     </div>
 
-    <div class="mb-3">
+    <ngx-material-intl-tel-input fieldControlName="tel" [required]="true" [autoIpLookup]="true">
+    </ngx-material-intl-tel-input>
+
+    <!-- <div class="mb-3">
       <label for="tel" class="form-label">{{formLabels.tel}} <span class="text-danger">*</span></label>
       <input type="tel" class="form-control" id="tel" aria-describedby="helpIdTel" [placeholder]="formPlaceholder.tel"
         formControlName="tel" (blur)="onValueChanges()"
@@ -174,7 +182,7 @@
       <div *ngIf="tel?.invalid && (tel?.dirty || tel?.touched)" class="invalid-feedback">
         {{formErrors.tel}}</div>
       <small id="helpIdTel" class="form-text text-muted">{{formHelpId.tel}}</small>
-    </div>
+    </div> -->
 
     <div class="mb-3">
       <p>{{formLabels.checkboxes}} <span class="text-danger">*</span>
@@ -218,6 +226,9 @@
     <div class="mb-3">
       <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Save</button>
     </div>
+
+
+
 
   </form>
 

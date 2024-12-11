@@ -38,6 +38,7 @@ import { requestInterface } from '../../../shared/interface/request.interface';
 import { AngularMaterialTableComponent } from '../angular-material-table/angular-material-table.component';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { BootstrapTableComponent } from '../../bootstrap/bootstrap-table/bootstrap-table.component';
+import { NgxMaterialIntlTelInputComponent } from 'ngx-material-intl-tel-input';
 
 @Component({
   selector: 'app-angular-material-form',
@@ -53,6 +54,7 @@ import { BootstrapTableComponent } from '../../bootstrap/bootstrap-table/bootstr
     AngularMaterialTableComponent,
     FormsModule,
     BootstrapTableComponent,
+    NgxMaterialIntlTelInputComponent,
   ],
   templateUrl: './angular-material-form.component.html',
   styleUrl: './angular-material-form.component.scss',
@@ -126,7 +128,7 @@ export class AngularMaterialFormComponent implements OnInit {
       ]),
       tel: new FormControl(null, [
         Validators.required,
-        Validators.pattern(/^\d+$/),
+        // Validators.pattern(/^\d+$/),
       ]),
       // checkboxes: new FormControl(null, [Validators.required]),
       location: new FormControl(null, [Validators.required]),
