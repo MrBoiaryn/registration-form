@@ -2,10 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { dataInterface } from '../../../shared/interface/data.interface';
 import { HttpService } from '../../../shared/services/http.service';
 import { LengthPipe } from '../../../shared/pipes/length.pipe';
+import { BreakOnPipe } from '../../../shared/pipes/breakOn.pipe';
 
 @Component({
   selector: 'app-bootstrap-table',
-  imports: [LengthPipe],
+  imports: [LengthPipe, BreakOnPipe],
   templateUrl: './bootstrap-table.component.html',
   styleUrl: './bootstrap-table.component.scss',
 })

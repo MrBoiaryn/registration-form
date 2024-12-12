@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LengthPipe } from '../../../shared/pipes/length.pipe';
 import { dataInterface } from '../../../shared/interface/data.interface';
+import { BreakOnPipe } from '../../../shared/pipes/breakOn.pipe';
 
 @Component({
   selector: 'app-angular-material-table',
@@ -21,6 +22,7 @@ import { dataInterface } from '../../../shared/interface/data.interface';
     MatSortModule,
     MatPaginatorModule,
     LengthPipe,
+    BreakOnPipe,
   ],
   templateUrl: './angular-material-table.component.html',
   styleUrl: './angular-material-table.component.scss',
@@ -32,7 +34,7 @@ export class AngularMaterialTableComponent implements OnInit, OnChanges {
     'companyName',
     'email',
     'tel',
-    'checkboxes',
+    'selectedCheckboxes',
     'location',
     'comment',
   ];

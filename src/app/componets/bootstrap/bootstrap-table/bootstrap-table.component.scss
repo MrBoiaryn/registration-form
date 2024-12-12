@@ -1,3 +1,20 @@
-:host {
-  display: block;
+.container-table{
+  overflow-x: scroll;
+}
+
+.table {
+  vertical-align: middle;
+
+  .sotial-phone{
+    min-width: 150px;
+  }
+
+  .sotial-width {
+    width: 80px;
+  }
+  
+  .comment-width{
+    min-width: 300px;
+    max-width: 300px;
+  }
 }

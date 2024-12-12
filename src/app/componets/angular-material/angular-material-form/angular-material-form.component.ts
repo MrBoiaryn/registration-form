@@ -29,7 +29,10 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import {
+  MatCheckboxChange,
+  MatCheckboxModule,
+} from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpService } from '../../../shared/services/http.service';
@@ -39,6 +42,7 @@ import { AngularMaterialTableComponent } from '../angular-material-table/angular
 import { ErrorStateMatcher } from '@angular/material/core';
 import { BootstrapTableComponent } from '../../bootstrap/bootstrap-table/bootstrap-table.component';
 import { NgxMaterialIntlTelInputComponent } from 'ngx-material-intl-tel-input';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-angular-material-form',
@@ -55,6 +59,7 @@ import { NgxMaterialIntlTelInputComponent } from 'ngx-material-intl-tel-input';
     FormsModule,
     BootstrapTableComponent,
     NgxMaterialIntlTelInputComponent,
+    MatIconModule,
   ],
   templateUrl: './angular-material-form.component.html',
   styleUrl: './angular-material-form.component.scss',
@@ -72,6 +77,9 @@ export class AngularMaterialFormComponent implements OnInit {
   userForm!: FormGroup;
 
   data: dataInterface[] = [];
+  selectedCheckboxes: string[] = [];
+  hide = true;
+  hideCon = true;
 
   @Input() isMaterial!: boolean;
 
@@ -92,12 +100,19 @@ export class AngularMaterialFormComponent implements OnInit {
     });
   }
 
+  trackByFn(index: number, checkbox: string): string {
+    return checkbox;
+  }
+
   onSubmit(): void {
+    const formData = this.userForm.value;
+    formData.selectedCheckboxes = this.selectedCheckboxes;
+
     this.httpService.createData(this.userForm.value).subscribe({
       next: (res: requestInterface) => {
         this.data.push({ ...{ key: res.name }, ...this.userForm.value });
-        this.userForm.reset();
         this.data = [...this.data];
+        this.userForm.reset();
       },
       error: (err: any) => {
         console.log(err);
@@ -126,10 +141,7 @@ export class AngularMaterialFormComponent implements OnInit {
         Validators.required,
         MatchingPasswords('password'),
       ]),
-      tel: new FormControl(null, [
-        Validators.required,
-        // Validators.pattern(/^\d+$/),
-      ]),
+      tel: new FormControl(null, [Validators.required]),
       // checkboxes: new FormControl(null, [Validators.required]),
       location: new FormControl(null, [Validators.required]),
       comment: new FormControl(null, [Validators.required]),
@@ -187,5 +199,35 @@ export class AngularMaterialFormComponent implements OnInit {
         });
       }
     });
+  }
+
+  onCheckboxChangeAM(event: any) {
+    const isChecked = event.checked;
+    const value = event.source.value;
+
+    if (isChecked) {
+      this.selectedCheckboxes.push(value);
+    } else {
+      this.selectedCheckboxes = this.selectedCheckboxes.filter(
+        (v) => v !== value
+      );
+    }
+
+    console.log('Selected checkboxes:', this.selectedCheckboxes);
+  }
+
+  onCheckboxChangeB(event: any): void {
+    const isChecked = event.target.checked; // Отримуємо стан чекбоксу (відмічений/не відмічений)
+    const value = event.target.value; // Отримуємо значення чекбоксу
+
+    if (isChecked) {
+      this.selectedCheckboxes.push(value); // Додаємо значення, якщо чекбокс відмічений
+    } else {
+      this.selectedCheckboxes = this.selectedCheckboxes.filter(
+        (v) => v !== value // Видаляємо значення, якщо чекбокс знятий
+      );
+    }
+
+    console.log('Selected checkboxes:', this.selectedCheckboxes);
   }
 }

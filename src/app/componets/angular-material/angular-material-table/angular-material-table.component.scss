@@ -13,10 +13,21 @@ table {
   width: 100%;
 }
 
-// td, th {
-//   width: 25%;
-// }
-
 .mat-elevation-z8{
   overflow-y: scroll;
 }
+
+.sotial-width {
+  width: 80px;
+}
+
+.comment-width{
+  min-width: 300px;
+  max-width: 300px;
+}
+
+.sotial-phone{
+  min-width: 150px;
+}
+
+

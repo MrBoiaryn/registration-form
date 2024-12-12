@@ -6,7 +6,7 @@ export interface dataInterface {
   password: string;
   confirmPassword: string;
   tel: number;
-  checkboxes: string[];
+  selectedCheckboxes: string[];
   location: string;
   comment: string;
 }
